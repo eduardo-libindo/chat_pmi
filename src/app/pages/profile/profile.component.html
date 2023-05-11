@@ -1,0 +1,56 @@
+<div class="container" *ngIf="currentUser; else loggedOut">
+  <header class="jumbotron">
+    <h3>
+      Perfil <strong>{{ currentUser.firstName}} {{currentUser.secondName }}</strong>
+    </h3>
+  </header>
+
+  <p>
+    <strong>Name:</strong>
+    {{ currentUser.firstName}} {{currentUser.secondName }}
+  </p>
+
+  <p>
+    <strong>Username:</strong>
+    {{ currentUser.username }}
+  </p>
+
+  <p>
+    <strong>Email:</strong>
+    {{ currentUser.email }}
+  </p>
+
+  <strong>Tipo de Função:</strong>
+  <ul>
+    <li>
+      {{ type_role(currentUser.role) }}
+    </li>
+  </ul>
+
+  <p>
+    <strong>Status:</strong>
+    {{ currentUser.isActive ? "active" : "inactive" }}
+  </p>
+
+  <p>
+    <strong>Createdat:</strong>
+    {{ currentUser.createdAt }}
+  </p>
+
+  <p>
+    <strong>Updatedat:</strong>
+    {{ currentUser.updatedAt }}
+  </p>
+
+  <button class="badge badge-danger mr-2" (click)="deleteUser()">
+    Delete
+  </button>
+
+  <p>{{ content }}</p>
+  <p>{{ type }}</p>
+  
+</div>
+
+<ng-template #loggedOut>
+  Por favor faça login.
+</ng-template>

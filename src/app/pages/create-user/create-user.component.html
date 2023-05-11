@@ -1,0 +1,55 @@
+<div>
+  <div class="submit-form">
+    <div *ngIf="!submitted">
+
+      <div class="form-group">
+        <label for="first_name">First Name</label>
+        <input type="text" class="form-control" id="first_name" [(ngModel)]="user.firstName" name="first_name" />
+      </div>
+
+      <div class="form-group">
+        <label for="last_name">Second Name</label>
+        <input type="text" class="form-control" id="last_name" [(ngModel)]="user.secondName" name="last_name" />
+      </div>
+
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" class="form-control" id="username" [(ngModel)]="user.username" name="username" />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" class="form-control" id="email" [(ngModel)]="user.email" name="email" />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" [(ngModel)]="user.password" name="password" />
+      </div>
+
+      <div class="form-group">
+        <label for="role">Role</label>
+        <select class="form-control" id="role" required [(ngModel)]="user.role" name="role">
+          <option value="" disabled selected="selected">choose a role</option>
+          <option *ngFor="let role of roles" value="{{role.id}}">{{role.name}}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="status">Status</label>
+        <select class="form-control" id="status" required [(ngModel)]="user.isActive" name="status">
+          <option value="" disabled selected="selected">choose a options</option>
+          <option value="true">Active</option>
+          <option value="false">inactive</option>
+        </select>
+      </div>
+
+      <button (click)="saveUser()" class="btn btn-success">Submit</button>
+    </div>
+
+    <div *ngIf="submitted">
+      <h4>User was submitted successfully!</h4>
+      <button class="btn btn-success" (click)="newUser()">Add</button>
+    </div>
+  </div>
+</div>

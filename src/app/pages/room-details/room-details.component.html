@@ -1,0 +1,76 @@
+<div *ngIf="viewMode; else editable">
+  <div *ngIf="currentRoom.id">
+    <h4>Room</h4>
+    <div>
+      <label><strong>Name:</strong></label>
+      {{ currentRoom.name }}
+    </div>
+    <div>
+      <label><strong>Sector:</strong></label>
+      {{ type_sector(currentRoom.sector) }}
+    </div>
+    <div>
+      <label><strong>Status:</strong></label>
+      {{ currentRoom.isActive ? "Active" : "Inactive" }}
+    </div>
+
+    <a class="badge badge-warning" routerLink="/rooms/{{ currentRoom.id }}">
+      Edit
+    </a>
+  </div>
+
+  <div *ngIf="!currentRoom">
+    <br />
+    <p>Please click on a Room...</p>
+  </div>
+</div>
+
+<ng-template #editable>
+  <div *ngIf="currentRoom.id" class="edit-form">
+    <h4>Room</h4>
+    <form>
+
+      <div class="form-group">
+        <label for="title">Name</label>
+        <input type="text" class="form-control" id="name" [(ngModel)]="currentRoom.name" name="name" />
+      </div>
+
+      <div class="form-group">
+        <label for="sector">Sector</label>
+        <select class="form-control" id="sector" required [(ngModel)]="currentRoom.sector" name="sector">
+          <option value="" disabled selected="selected">choose a sector</option>
+          <option *ngFor="let sector of sectores" value="{{sector.id}}">{{sector.name}}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="status">Status</label>
+        <select class="form-control" id="status" required [(ngModel)]="currentRoom.isActive" name="status">
+          <option value="" disabled selected="selected">choose a status</option>
+          <option value=true>Active</option>
+          <option value=false>Inactive</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label><strong>Status:</strong></label>
+        {{ currentRoom.isActive ? "Active" : "Inactive" }}
+      </div>
+
+    </form>
+
+    <button *ngIf="showAdminBoard" class="badge badge-danger mr-2" (click)="deleteRoom()">
+      Delete
+    </button>
+
+    <button type="submit" class="badge badge-success mb-2" (click)="updateRoom()">
+      Update
+    </button>
+    <p>{{ message }}</p>
+  </div>
+
+  <div *ngIf="!currentRoom.id">
+    <br />
+    <p>Cannot access this Room...</p>
+  </div>
+</ng-template>

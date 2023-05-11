@@ -1,0 +1,71 @@
+<div>
+  <div class="submit-form">
+    <div *ngIf="!submitted">
+
+      <form *ngIf="!submitted" name="form" (ngSubmit)="f.form.valid && saveRoom()" #f="ngForm" novalidate>
+
+        <div class="form-group">
+          <label for="name">Nome</label>
+          <input type="text" class="form-control" id="name" name="name" [(ngModel)]="room.name" required #name="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && name.invalid }"
+            [ngClass]="{ 'is-valid': f.submitted && name.valid}">
+          <div *ngIf="name.invalid && f.submitted" class="invalid-feedback">
+            Nome é necessário!
+          </div>
+          <div *ngIf="name.valid && f.submitted" class="valid-feedback">
+            Setor é valido!
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="sector">Sector</label>
+          <select class="form-control" id="sector" name="sector" [(ngModel)]="room.sector" required #sector="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && sector.invalid }"
+            [ngClass]="{ 'is-valid': f.submitted && sector.valid}">
+            <option value="" disabled selected="selected">choose a sector</option>
+            <option *ngFor="let sector of sectores" value="{{sector.id}}">{{sector.name}}</option>
+          </select>
+          <div *ngIf="sector.invalid && f.submitted" class="invalid-feedback">
+            Setor é necessário!
+          </div>
+          <div *ngIf="sector.valid && f.submitted" class="valid-feedback">
+            Setor é valido!
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select class="form-control" id="status" name="status" [(ngModel)]="room.isActive" required #status="ngModel"
+            [ngClass]="{ 'is-invalid': f.submitted && status.invalid }"
+            [ngClass]="{ 'is-valid': f.submitted && status.valid}">
+            <option value="" disabled selected="selected">choose a status</option>
+            <option value=true>Active</option>
+            <option value=false>Inactive</option>
+          </select>
+          <div *ngIf="status.invalid && f.submitted" class="invalid-feedback">
+            Status é necessário!
+          </div>
+          <div *ngIf="name.valid && f.submitted" class="valid-feedback">
+            Status é valido!
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-primary btn-block">
+            Submit
+          </button>
+        </div>
+        <div class="form-group">
+          <div *ngIf="f.submitted && isSubmitFailed" class="alert alert-danger" role="alert">
+            Falha ao criar Sala: {{ errorMessage }}
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <div *ngIf="submitted">
+      <h4>Room was submitted successfully!</h4>
+      <button class="btn btn-success" (click)="newRoom()">Add</button>
+    </div>
+  </div>
+</div>

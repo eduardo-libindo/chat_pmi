@@ -36,7 +36,7 @@ export class AppComponent {
   ngOnInit(): void {
     this.authService.getProtected().subscribe({
       next: (data) => {
-        console.log(data);
+        // console.log(data);
         
         this.isLoggedIn = true;
 
@@ -46,7 +46,7 @@ export class AppComponent {
 
         this.roleService.getByRole(this.currentUser?.role).subscribe({
           next: (data) => {
-            console.log(data);
+            // console.log(data);
 
             this.role = data;
 
@@ -63,13 +63,13 @@ export class AppComponent {
             }
           },
           error: (err) => {
-            console.log('getByRole: ', err);
+            // console.log('getByRole: ', err);
             this.isLoggedIn = false;
           },
         });
       },
       error: (err) => {
-        console.log('getProtected: ', err);
+        // console.log('getProtected: ', err);
         this.isLoggedIn = false;
       },
     });

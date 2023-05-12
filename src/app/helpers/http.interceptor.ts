@@ -5,89 +5,48 @@ import {
   HttpHandler,
   HttpRequest,
   HTTP_INTERCEPTORS,
-  HttpErrorResponse,
   HttpResponse,
 } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
-import { StorageService } from '../services/storage.service';
-import { EventBusService } from '../shared/event-bus.service';
-import { EventData } from '../shared/event.class';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
-  private isRefreshing = false;
-
-  constructor(
-    private eventBusService: EventBusService
-  ) {}
+  constructor() {}
 
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-
-    // if (!req.headers.has('Content-Type')) {
-    //   req = req.clone({
-    //     headers: req.headers.set('Content-Type', 'application/json')
-    //   });
-    // }
     
-    // req = req.clone({
-    //   withCredentials: true,
-    //   // setHeaders: {
-    //   //   Authorization: `Bearer ${this.token}`,
-    //   // },
-    // });
+    req = req.clone({
+      withCredentials: true,
+    });
 
     return next.handle(req).pipe(
-
       tap({
         next: (event) => {
           if (event instanceof HttpResponse) {
-            if (event.status == 401) {
-              alert('Acesso não autorizado, voce esta com o acesso publico apenas!');
+            if (event.status == 200) {
+              console.log(
+                'Acesso autorizado, na rota => ' + event.url
+              );
             }
           }
           return event;
         },
         error: (error) => {
           if (error.status === 401) {
-            alert('Acesso não autorizado, voce esta com o acesso publico apenas!');
+            console.log(
+              'Voce esta com o acesso publico apenas, faça login para ter acesso completo!'
+            );
           } else if (error.status === 404) {
             alert('Página não encontrada!');
           }
         },
       })
-
-      // catchError((error) => {
-      //   if (
-      //     error instanceof HttpErrorResponse &&
-      //     !req.url.includes('auth/signin') &&
-      //     error.status === 401
-      //   ) {
-      //     return this.handle401Error(req, next);
-      //   }
-
-      //   return throwError(() => error);
-      // }
-      
-      // )
-
     );
   }
-
-  // private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
-  //   if (!this.isRefreshing) {
-  //     this.isRefreshing = true;
-
-  //     if (!this.storageService.getIsLogged()) {
-  //       this.eventBusService.emit(new EventData('logout', null));
-  //     }
-  //   }
-
-  //   return next.handle(request);
-  // }
 }
 
 export const httpInterceptorProviders = [

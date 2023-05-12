@@ -29,16 +29,13 @@ export class LoginComponent implements OnInit {
     this.authService.login(username, password).subscribe({
       next: (data) => {
         console.log(data);
+        this.isLoggedIn = true;
 
-        if (data !== null) {
-          this.isLoggedIn = true;
-          this.isLoginFailed = false;
-
-          setTimeout(() => {
-            this.router.navigate(['/']);
-            this.reloadPage();
-          });
-        }
+        setTimeout(() => {
+          this.router.navigate(['/']);
+          this.reloadPage();
+        },2000);
+        
       },
       error: (err) => {
         this.errorMessage = err.error?.message;

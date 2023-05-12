@@ -29,7 +29,7 @@ export class CreateRoomComponent implements OnInit {
   ngOnInit(): void {
     this.sectorService.getAll().subscribe({
       next: (res) => {
-        console.log(res);
+        // console.log(res);
         this.sectores = res;
       },
       error: (err) => {
@@ -41,7 +41,7 @@ export class CreateRoomComponent implements OnInit {
   saveRoom(): void {
     this.roomService.create(this.room).subscribe({
       next: (res) => {
-        console.log(res);
+        // console.log(res);
         this.isSubmitFailed = false;
         this.submitted = true;
       },

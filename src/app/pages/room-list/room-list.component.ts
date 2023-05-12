@@ -39,7 +39,7 @@ export class RoomListComponent implements OnInit {
 
     this.authService.getProtected().subscribe({
       next: (data) => {
-        console.log(data);
+        // console.log(data);
 
         this.isLoggedIn = true;
 
@@ -49,7 +49,7 @@ export class RoomListComponent implements OnInit {
 
         this.roleService.getByRole(this.currentUser?.role).subscribe({
           next: (data) => {
-            console.log(data);
+            // console.log(data);
 
             this.role = data;
 
@@ -82,7 +82,7 @@ export class RoomListComponent implements OnInit {
     this.roomService.getAll().subscribe({
       next: (data) => {
         this.rooms = data;
-        console.log(data);
+        // console.log(data);
       },
       error: (e) => console.error(e),
     });
@@ -102,7 +102,7 @@ export class RoomListComponent implements OnInit {
   removeAllRooms(): void {
     this.roomService.deleteAll().subscribe({
       next: (res) => {
-        console.log(res);
+        // console.log(res);
         this.refreshList();
       },
       error: (e) => console.error(e),
@@ -116,7 +116,7 @@ export class RoomListComponent implements OnInit {
     this.roomService.getByName(this.name).subscribe({
       next: (data) => {
         this.rooms = data;
-        console.log(data);
+        // console.log(data);
       },
       error: (e) => console.error(e),
     });

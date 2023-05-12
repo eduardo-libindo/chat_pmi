@@ -29,19 +29,19 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
 
   { path: 'login', component: LoginComponent },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [] },
 
-  { path: 'user', component: UserComponent, canActivate: [AuthGuard, UserGuard] },
-  { path: 'mod', component: ModeratorComponent, canActivate: [AuthGuard, ModeratorGuard] },
-  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard, AdminGuard] },
+  { path: 'user', component: UserComponent, canActivate: [] },
+  { path: 'mod', component: ModeratorComponent, canActivate: [] },
+  { path: 'admin', component: AdminComponent, canActivate: [] },
 
-  { path: 'users', component: UserListComponent, canActivate: [AuthGuard] },
-  { path: 'users/:id', component: UserDetailsComponent, canActivate: [AuthGuard] },
-  { path: 'add-user', component: CreateUserComponent, canActivate: [AuthGuard] },
+  { path: 'users', component: UserListComponent, canActivate: [] },
+  { path: 'users/:id', component: UserDetailsComponent, canActivate: [] },
+  { path: 'add-user', component: CreateUserComponent, canActivate: [] },
 
-  { path: 'rooms', component: RoomListComponent, canActivate: [AuthGuard] },
-  { path: 'rooms/:id', component: RoomDetailsComponent, canActivate: [AuthGuard] },
-  { path: 'add-room', component: CreateRoomComponent, canActivate: [AuthGuard] },
+  { path: 'rooms', component: RoomListComponent, canActivate: [] },
+  { path: 'rooms/:id', component: RoomDetailsComponent, canActivate: [] },
+  { path: 'add-room', component: CreateRoomComponent, canActivate: [] },
 
   { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
